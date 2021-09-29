@@ -16,7 +16,7 @@ const CashAmount = ({
                     helperText="Cash Given"
                     defaultValue={billvalue}
                     invalid={invalidCash}
-                    invalidText = "Cash Given should be greater than or Equal to Bill Value"
+                    invalidText = "Cash Given should be greater than Bill Value"
                     size='lg'
                     onChange={(e) => {
                         setcashamount(e.imaginaryTarget.value || e.imaginaryTarget.defaultValue);
