@@ -5,8 +5,8 @@ import CashAmount from './components/CashAmount';
 import Result from './components/Result';
 
 function App() {
-
   const [cashamount,setcashamount]= useState(null);
+  const [invalidCash, setinvalidCash] = useState(false);
   const [isbillentered,setisbillentered]= useState(false);
   const [billamount,setbillamount]= useState(null);
   const [isinvalid,setisinvalid]= useState(false);
@@ -20,26 +20,24 @@ function App() {
           Enter the <code>bill amount</code> and <code>cash given</code> by the customer and know minimum number of notes to return.
           </h1>
         </header>
-
         <div className="App-intro">
           <BillAmount 
-            isbillentered = {isbillentered}
-            setisbillentered = {setisbillentered}
-            cashamount = {cashamount}
-            setcashamount = {setcashamount}
             isinvalid = {isinvalid}
             setisinvalid = {setisinvalid}
             setbillamount = {setbillamount}
           />
-
           <CashAmount 
+            billvalue = {billamount}
+            invalidCash={invalidCash}
+            setinvalidCash={setinvalidCash}
             isbillentered = {isbillentered}
             setcashamount = {setcashamount}
           />
-
           <Result 
             billamount = {billamount}
             cashamount = {cashamount}
+            isinvalid={isinvalid}
+            invalidCash={invalidCash}
             setisinvalid = {setisinvalid}
             setisbillentered = {setisbillentered}
             isbillentered = {isbillentered}

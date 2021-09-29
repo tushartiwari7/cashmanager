@@ -1,7 +1,12 @@
 import { NumberInput } from "carbon-components-react"
 
-const CashAmount = ({isbillentered,setcashamount}) => {
-
+const CashAmount = ({
+    invalidCash,
+    setinvalidCash,
+    billvalue,
+    isbillentered,
+    setcashamount
+}) => {
     return (
         <>
         {isbillentered && 
@@ -9,9 +14,16 @@ const CashAmount = ({isbillentered,setcashamount}) => {
                     className="cashamount"
                     id="cashamount"
                     helperText="Cash Given"
+                    defaultValue={billvalue}
+                    invalid={invalidCash}
+                    invalidText = "Cash Given should be greater than or Equal to Bill Value"
                     size='lg'
                     onChange={(e) => {
-                        setcashamount(e.imaginaryTarget.value)
+                        setcashamount(e.imaginaryTarget.value || e.imaginaryTarget.defaultValue);
+                        if(Number(e.imaginaryTarget.value)>billvalue)
+                            setinvalidCash(false)
+                        else
+                            setinvalidCash(true)
                     } }
                 />
             }

@@ -16,18 +16,19 @@ import { getrowdata,headerData } from "../Utils";
 const Result = ({
     billamount,
     cashamount,
+    isinvalid,
+    invalidCash,
     setisinvalid,
     setisbillentered,
     isbillentered,
     open,
     setOpen
     }) => {
-        // call getrowdata and pass numberOfNotes array and notes array to get structured data
-        // getrowdata(notes,numberOfNotes(billamount,cashamount));
     return (
         <>
         <Button
             className="btn-primary"
+            disabled ={isinvalid|| invalidCash}
             onClick={() => {                    
                 // do it when Next Button is Clicked
                 if (billamount === 0 || billamount === null)
@@ -38,7 +39,6 @@ const Result = ({
                 }
                 // do it when Calculate Button is Clicked
                 isbillentered ? setOpen(true) : setOpen(false)
-
             }}
         > {isbillentered ? 'Calculate' : 'Next'}</Button>
         
@@ -47,8 +47,7 @@ const Result = ({
             modalHeading={"Return Amount = " + totalchange(billamount, cashamount)}
             primaryButtonText="OK"
             secondaryButtonText="Cancel"
-            shouldSubmitOnEnter
-            
+            shouldSubmitOnEnter            
             onRequestClose={() => {setOpen(false)}}
             onRequestSubmit={() => {setOpen(false)}}
         >
@@ -58,7 +57,7 @@ const Result = ({
                     <TableContainer title="Return Change">
                     <Table {...getTableProps()} size="xl">
                         <TableHead>
-                        <TableRow>
+                        <TableRow key={rows.id} >
                             {headers.map((header) => (
                             <TableHeader {...getHeaderProps({ header })}>
                                 {header.header}
@@ -68,7 +67,7 @@ const Result = ({
                         </TableHead>
                         <TableBody>
                         {rows.map((row) => (
-                            <TableRow key={row.Notes}>
+                            <TableRow key={row.id}>
                             {row.cells.map((cell) => (
                                 <TableCell key={cell.Notes}>{cell.value}</TableCell>
                             ))}
@@ -80,8 +79,6 @@ const Result = ({
                 )}
             </DataTable>
         </Modal>
-        
-            
     </>
     );
 }

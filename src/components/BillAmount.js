@@ -1,17 +1,11 @@
 import { NumberInput} from 'carbon-components-react';
 import React from 'react';
 
-
 const BillAmount = ({
-    isbillentered,
-    setisbillentered,
-    cashamount,
-    setcashamount,
     isinvalid,
     setisinvalid,
     setbillamount
-}) => {
-    
+}) => {    
     return (
         <>
             <NumberInput 
@@ -19,10 +13,14 @@ const BillAmount = ({
                 id="billamount"
                 invalid={isinvalid}
                 helperText="Bill Value"
+                invalidText="Bill value should be greater than 0"
                 size='lg'
                 onChange={(e) => {
                     setbillamount(e.imaginaryTarget.value)
-                    setisinvalid(false)
+                    if (e.imaginaryTarget.value>0) 
+                        setisinvalid(false);
+                    else 
+                        setisinvalid(true);
                 } }
             />
             
