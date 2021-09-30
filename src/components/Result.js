@@ -16,6 +16,7 @@ import { getrowdata,headerData } from "../Utils";
 const Result = ({
     billamount,
     cashamount,
+    setcashamount,
     isinvalid,
     invalidCash,
     setisinvalid,
@@ -30,24 +31,25 @@ const Result = ({
             className="btn-primary"
             disabled ={isinvalid|| invalidCash}
             onClick={() => {                    
+                console.log(`billamount: ${billamount} \n cashGiven: ${cashamount}`);
                 // do it when Next Button is Clicked
                 if (billamount === 0 || billamount === null)
                     setisinvalid(true) 
                 else {
                     setisinvalid(false)
                     setisbillentered(true)
+                    setcashamount(billamount)
                 }
                 // do it when Calculate Button is Clicked
                 isbillentered ? setOpen(true) : setOpen(false)
             }}
         > {isbillentered ? 'Calculate' : 'Next'}</Button>
-        
         <Modal 
             open={open}
             modalHeading={"Return Amount = " + totalchange(billamount, cashamount)}
             primaryButtonText="OK"
             secondaryButtonText="Cancel"
-            shouldSubmitOnEnter            
+            shouldSubmitOnEnter
             onRequestClose={() => {setOpen(false)}}
             onRequestSubmit={() => {setOpen(false)}}
         >

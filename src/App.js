@@ -36,6 +36,7 @@ function App() {
           <Result 
             billamount = {billamount}
             cashamount = {cashamount}
+            setcashamount={setcashamount}
             isinvalid={isinvalid}
             invalidCash={invalidCash}
             setisinvalid = {setisinvalid}
